@@ -10,7 +10,7 @@ class SlvWrapper:
     def __init__(self) -> None:
         """Initialization."""
         self.version = 1
-        list_of_foods_url = "https://dataportal.livsmedelsverket.se/livsmedel/api/v{self.version}/livsmedel?offset=0&limit=2556&sprak=1"
+        list_of_foods_url = f"https://dataportal.livsmedelsverket.se/livsmedel/api/v{self.version}/livsmedel?offset=0&limit=2556&sprak=1"
         all_foods = requests.get(list_of_foods_url)  # noqa: S113
         self.all_foods = all_foods.json()["livsmedel"]
 
