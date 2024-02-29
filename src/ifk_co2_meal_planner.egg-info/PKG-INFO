@@ -1,3 +1,38 @@
+Metadata-Version: 2.1
+Name: ifk-co2-meal-planner
+Version: 0.1.0
+Summary: For evaluation of nutrition and CHG of meals.
+Author-email: IFK <info@ingenjorsarbeteforklimatet.se>
+License: MIT
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests==2.31.0
+Requires-Dist: pandas==2.2.0
+Requires-Dist: matplotlib==3.8.2
+Requires-Dist: pyarrow==15.0.0
+Provides-Extra: lint
+Requires-Dist: ruff~=0.1; extra == "lint"
+Provides-Extra: type
+Requires-Dist: mypy~=1.7; extra == "type"
+Requires-Dist: types-requests~=2.28; extra == "type"
+Requires-Dist: pandas-stubs~=1.5; extra == "type"
+Provides-Extra: test
+Requires-Dist: pytest~=7.1; extra == "test"
+Requires-Dist: coverage~=6.5; extra == "test"
+Requires-Dist: pytest-cov~=4.0; extra == "test"
+Provides-Extra: doc
+Requires-Dist: mkdocs~=1.4; extra == "doc"
+Requires-Dist: mkdocs-material~=8.5; extra == "doc"
+Requires-Dist: mkdocstrings[python]~=0.19; extra == "doc"
+Provides-Extra: dev
+Requires-Dist: ifk-co2-meal-planner[lint]; extra == "dev"
+Requires-Dist: ifk-co2-meal-planner[type]; extra == "dev"
+Requires-Dist: ifk-co2-meal-planner[test]; extra == "dev"
+Requires-Dist: ifk-co2-meal-planner[doc]; extra == "dev"
+Requires-Dist: pre-commit~=2.20; extra == "dev"
+Requires-Dist: ipykernel~=6.26; extra == "dev"
+
 <h1 align="center">ifk-co2-meal-planner</h1>
 
 <p align="center">

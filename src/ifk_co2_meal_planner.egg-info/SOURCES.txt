@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+src/co2_meal_planner/slv_wrapper.py
+src/ifk_co2_meal_planner.egg-info/PKG-INFO
+src/ifk_co2_meal_planner.egg-info/SOURCES.txt
+src/ifk_co2_meal_planner.egg-info/dependency_links.txt
+src/ifk_co2_meal_planner.egg-info/requires.txt
+src/ifk_co2_meal_planner.egg-info/top_level.txt
+tests/test_unit.py
