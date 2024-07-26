@@ -62,6 +62,7 @@ mineral_df = pd.concat([mineral_df, rdi_df])
 pd.set_option("display.max_columns", 500)
 print(mineral_df)
 
+
 # %%
 
 for gen in rdi["Zink, Zn"].keys():
@@ -76,3 +77,58 @@ ax.legend(bbox_to_anchor=(1.42, 1))
 ax.axvline(x=100)
 ax.set_xlim([0, 100])
 ax.grid()
+
+
+# %%
+# get classifications
+a = slv.get_ingredients_from_number(300)
+
+classifications = []
+for i in range(1, 70):
+    classification = slv.get_calssification_from_number(i)
+    try:
+        if len(slv.get_ingredients_from_number(i)) == 1:
+            if classification[-1]["kod"] not in classifications:
+                classifications.append(classification[-1]["kod"])
+    except Exception:
+        print("did not find number: ", i)
+
+for x in classifications:
+    print(x)
+
+# %%
+menu = {
+    "Mango": {"number": 574, "weight": 50},
+    "Cashewnötter rostade u. salt": {"number": 1557, "weight": 20},
+    "Hirs kokt m. salt fullkorn": {"number": 834, "weight": 100},
+    "Potatisgratäng m. lättmjölk ost mager hemlagad": {"number": 279, "weight": 300},
+}
+
+# breakdown to ingredients
+menu_ingredients = {}
+for key, value_dict in menu.items():
+    ingredients = slv.get_ingredients_from_number(value_dict["number"])
+    if len(ingredients) == 1:
+        if key in menu_ingredients.keys():
+            menu_ingredients[key]["weight"] = (
+                menu_ingredients[key]["weight"] + value_dict["weight"]
+            )
+        else:
+            menu_ingredients[key] = value_dict
+    else:
+        total_weight = value_dict["weight"]
+        for food in ingredients:
+            number = slv.get_number_from_name(food["namn"])
+            weight = (total_weight * food["andel"]) / 100
+            if food["namn"] in menu_ingredients.keys():
+                menu_ingredients[food["namn"]]["weight"] = (
+                    menu_ingredients[food["namn"]]["weight"] + weight
+                )
+            else:
+                menu_ingredients[food["namn"]] = {"number": number, "weight": weight}
+
+
+# %%
+
+
+a = slv.search_food("Mjölk")

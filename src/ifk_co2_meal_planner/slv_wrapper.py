@@ -21,10 +21,27 @@ class SlvWrapper:
             food: name of food to search for.
         """
         for livsmedel in self.all_foods:
-            if food in livsmedel["namn"].lower():
+            if food.lower() in livsmedel["namn"].lower():
                 print(livsmedel["namn"], livsmedel["nummer"])
 
         pass
+
+    def get_number_from_name(self, food: str) -> int:
+        """Get number from name.
+
+        Args:
+            food: name of food to search for.
+
+        Retruns:
+            number of food.
+        """
+        number = -1
+        for livsmedel in self.all_foods:
+            if food == livsmedel["namn"]:
+                number = livsmedel["nummer"]
+                break
+
+        return number
 
     def get_minerals_from_number(self, number: int) -> dict:
         """Get minerals and vitamins for given number.
@@ -38,6 +55,32 @@ class SlvWrapper:
         url = f"https://dataportal.livsmedelsverket.se/livsmedel/api/v{self.version}/livsmedel/{number}/naringsvarden"
         temp_minerals = requests.get(url).json()  # noqa: S113
         return temp_minerals
+
+    def get_ingredients_from_number(self, number: int) -> dict:
+        """Get ingredients for given number.
+
+        Args:
+            number: number corresponding to a specific food
+
+        Returns:
+            dict with ingredients
+        """
+        url = f"https://dataportal.livsmedelsverket.se/livsmedel/api/v{self.version}/livsmedel/{number}/ravaror"
+        ingredients = requests.get(url).json()  # noqa: S113
+        return ingredients
+
+    def get_classification_from_number(self, number: int) -> dict:
+        """Get classification from number.
+
+        Args:
+            number: number corresponding to a specific food
+
+        Returns:
+            dict classification
+        """
+        url = f"https://dataportal.livsmedelsverket.se/livsmedel/api/v{self.version}/livsmedel/{number}/klassificeringar"
+        classification_from_number = requests.get(url).json()  # noqa: S113
+        return classification_from_number
 
     def init_mineral_dict(self) -> dict:
         """Initialization of mineral dict.
